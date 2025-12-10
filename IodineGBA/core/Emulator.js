@@ -10,13 +10,13 @@
  */
 function GameBoyAdvanceEmulator() {
     this.settings = {
-        "SKIPBoot":false,                   //Skip the BIOS boot screen.
+        "SKIPBoot":true,                   //Skip the BIOS boot screen.
         "audioVolume":1,                    //Starting audio volume.
         "audioBufferUnderrunLimit":8,       //Audio buffer minimum span amount over x interpreter iterations.
         "audioBufferDynamicLimit":2,        //Audio buffer dynamic minimum span amount over x interpreter iterations.
         "audioBufferSize":20,               //Audio buffer maximum span amount over x interpreter iterations.
-        "timerIntervalRate":16,             //How often the emulator core is called into (in milliseconds).
-        "emulatorSpeed":2,                  //Speed multiplier of the emulator.
+        "timerIntervalRate":24,             //How often the emulator core is called into (in milliseconds).
+        "emulatorSpeed":1,                  //Speed multiplier of the emulator.
         "metricCollectionMinimum":30,       //How many cycles to collect before determining speed.
         "dynamicSpeed":false                 //Whether to actively change the target speed for best user experience.
     }
@@ -30,7 +30,7 @@ function GameBoyAdvanceEmulator() {
     this.ROM = [];                            //Initialize BIOS as not existing.
     //Cache some frame buffer lengths:
     this.offscreenRGBCount = ((this.offscreenWidth | 0) * (this.offscreenHeight | 0) * 3) | 0;
-    //Graphics buffers to generate in advance:
+    //Graphics buffers to generrate in advance:
     this.frameBuffer = getInt32Array(this.offscreenRGBCount | 0);        //The internal buffer to composite to.
     this.swizzledFrame = getUint8Array(this.offscreenRGBCount | 0);      //The swizzled output buffer that syncs to the internal framebuffer on v-blank.
     this.audioUpdateState = false;            //Do we need to update the sound core with new info?
